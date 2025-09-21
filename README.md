@@ -16,7 +16,10 @@ The app is preconfigured for:
 Edit `app/config/config.php` if needed.
 
 ## Initialize data
-- Create tables in MySQL using your provided SQL (already done per your note).
+- Create tables (phpMyAdmin or MySQL CLI):
+	- Open phpMyAdmin, select your database, go to the Import tab.
+	- Import `database/schema.sql`.
+	- Alternatively via CLI: `mysql -u <user> -p <db> < database/schema.sql`.
 - Seed the survey/questions and default admin:
 
 Run in a terminal (Windows bash):
@@ -25,7 +28,7 @@ Run in a terminal (Windows bash):
 php app/seed/seed.php
 ```
 
-This creates:
+This seeds:
 - Admin: username `admin` password `Admin@1234`
 - One active survey with sections and questions per the content you gave.
 
