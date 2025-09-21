@@ -1,0 +1,9 @@
+Options -Indexes
+
+RewriteEngine On
+# If the request is already under /public, do nothing
+RewriteCond %{REQUEST_URI} ^/public/ [NC]
+RewriteRule ^ - [L]
+
+# Otherwise, rewrite all to /public
+RewriteRule ^(.*)$ public/$1 [L,QSA]
