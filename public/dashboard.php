@@ -1,661 +1,1296 @@
-<?php<?php<?php
+<?php<?php
 
-require_once __DIR__ . '/bootstrap.php';
+require_once __DIR__ . '/bootstrap.php';require_once __DIR__ . '/bootstrap.php';
 
-$u = current_user();require_once __DIR__ . '/bootstrap.php';require_once __DIR__ . '/bootstrap.php';
+$u = current_user();$u = current_user();
 
-if (!$u || !in_array($u['role'], ['admin','teacher','committee'], true)) {
+if (!$u || !in_array($u['role'], ['admin','teacher','committee'], true)) {if (!$u || !in_array($u['role'], ['admin','teacher','committee'], true)) {
 
-    http_response_code(403); echo 'Forbidden'; exit;$u = current_user();$u = current_user();
+    http_response_code(403); echo 'Forbidden'; exit;    http_response_code(403); echo 'Forbidden'; exit;
 
-}
+}}
 
-?>if (!$u || !in_array($u['role'], ['admin','teacher','committee'], true)) {if (!$u || !in_array($u['role'], ['admin','teacher','committee'], true)) {
+?>?>
 
-<!doctype html>
+<!doctype html><!doctype html>
 
-<html lang="th" class="theme-light">    http_response_code(403); echo 'Forbidden'; exit;    http_response_code(403); echo 'Forbidden'; exit;
+<html lang="th" class="theme-light"><html lang="th" class="theme-light">
 
-<head>
+<head><head>
 
-  <meta charset="utf-8">}}
+  <meta charset="utf-8">  <meta charset="utf-8">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>📊 แดชบอร์ดสรุปผล</title>?>?>
+  <title>📊 แดชบอร์ดสรุปผล</title>
 
-  <link rel="stylesheet" href="/assets/css/dashboard.css">
+  <link rel="stylesheet" href="/assets/css/dashboard.css">  <title>📊 แดชบอร์ดสรุปผล</title>?>?>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script><!doctype html><!doctype html>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-</head>
+</head>  <link rel="stylesheet" href="/assets/css/dashboard.css">
 
-<body><html lang="th" class="theme-light"><html lang="th" class="theme-light">
+<body>
 
-<header class="modern-header">
+<header class="modern-header">  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script><!doctype html><!doctype html>
 
-  <div class="container"><head><head>
+  <div class="container">
 
-    <div class="header-content">
+    <div class="header-content"></head>
 
-      <div class="brand">  <meta charset="utf-8">  <meta charset="utf-8">
+      <div class="brand">
 
-        <span class="brand-icon">📊</span>
+        <span class="brand-icon">📊</span><body><html lang="th" class="theme-light"><html lang="th" class="theme-light">
 
-        <h1>แดชบอร์ดสรุปผล</h1>  <meta name="viewport" content="width=device-width, initial-scale=1">  <meta name="viewport" content="width=device-width, initial-scale=1">
+        <h1>แดชบอร์ดสรุปผล</h1>
 
-      </div>
+      </div><header class="modern-header">
 
-      <nav class="header-nav">  <title>📊 แดชบอร์ดสรุปผล</title>  <title>แดชบอร์ด</title>
+      <nav class="header-nav">
 
-        <a class="nav-btn" href="/index.php">
+        <a class="nav-btn" href="/index.php">  <div class="container"><head><head>
 
-          <span>📝</span> หน้าแบบประเมิน  <link rel="stylesheet" href="/assets/css/styles.css">  <link rel="stylesheet" href="/assets/css/styles.css">
+          <span>📝</span> หน้าแบบประเมิน
 
-        </a>
+        </a>    <div class="header-content">
 
-        <form method="post" action="/logout.php" class="inline">  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script></head>
+        <form method="post" action="/logout.php" class="inline">
 
-          <?=csrf_token_input()?>
+          <?=csrf_token_input()?>      <div class="brand">  <meta charset="utf-8">  <meta charset="utf-8">
 
-          <button class="nav-btn logout" type="submit">  <link rel="preconnect" href="https://fonts.googleapis.com"><body>
+          <button class="nav-btn logout" type="submit">
 
-            <span>🚪</span> ออกจากระบบ
+            <span>🚪</span> ออกจากระบบ        <span class="brand-icon">📊</span>
 
-          </button>  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><header class="topbar">
+          </button>
 
-        </form>
+        </form>        <h1>แดชบอร์ดสรุปผล</h1>  <meta name="viewport" content="width=device-width, initial-scale=1">  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">  <div class="brand">แดชบอร์ดสรุปผล</div>
+        <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
 
-          <span class="icon" data-icon-sun>☀️</span>
+          <span class="icon" data-icon-sun>☀️</span>      </div>
 
-          <span class="icon" data-icon-moon hidden">🌙</span></head>  <nav>
+          <span class="icon" data-icon-moon hidden">🌙</span>
 
-        </button>
+        </button>      <nav class="header-nav">  <title>📊 แดชบอร์ดสรุปผล</title>  <title>แดชบอร์ด</title>
 
-      </nav><body>    <a class="btn" href="/index.php">หน้าแบบประเมิน</a>
+      </nav>
 
-    </div>
-
-  </div><header class="modern-header">    <form method="post" action="/logout.php" class="inline"><?=csrf_token_input()?><button class="btn" type="submit">ออกจากระบบ</button></form>
-
-</header>
-
-  <div class="container">    <button id="themeToggle" class="icon-btn" aria-label="Toggle theme">
-
-<main class="main-content">
-
-  <div class="container">    <div class="header-content">      <span class="icon" data-icon-sun>☀</span>
-
-    <!-- คำอธิบายและตัวกรอง -->
-
-    <section class="intro-section">      <div class="brand">      <span class="icon" data-icon-moon hidden>🌙</span>
-
-      <div class="intro-card">
-
-        <h2>ยินดีต้อนรับสู่แดชบอร์ด</h2>        <span class="brand-icon">📊</span>    </button>
-
-        <p>สรุปข้อมูลและวิเคราะห์ผลการประเมินแบบเรียลไทม์</p>
-
-      </div>        <h1>แดชบอร์ดสรุปผล</h1>  </nav>
-
-      
-
-      <div class="filters-card">      </div></header>
-
-        <h3>🔍 ตัวกรองข้อมูล</h3>
-
-        <div class="filters-grid">      <nav class="header-nav"><main class="container">
-
-          <div class="filter-group">
-
-            <label>📅 ช่วงเวลา เริ่ม</label>        <a class="nav-btn" href="/index.php">  <section class="card">
-
-            <input type="datetime-local" id="from" class="modern-input">
-
-          </div>          <span>📝</span> หน้าแบบประเมิน    <h2 class="card-title">ตัวกรอง</h2>
-
-          <div class="filter-group">
-
-            <label>📅 ถึง</label>        </a>    <div class="filters">
-
-            <input type="datetime-local" id="to" class="modern-input">
-
-          </div>        <form method="post" action="/logout.php" class="inline">      <label>ช่วงเวลา เริ่ม <input type="datetime-local" id="from"></label>
-
-          <div class="filter-group">
-
-            <label>👥 ประเภทผู้ตอบ</label>          <?=csrf_token_input()?>      <label>ถึง <input type="datetime-local" id="to"></label>
-
-            <select id="respondent" class="modern-select">
-
-              <option value="">ทั้งหมด</option>          <button class="nav-btn logout" type="submit">      <label>ประเภทผู้ตอบ
-
-              <option value="expert">ผู้ทรงคุณวุฒิ</option>
-
-              <option value="teacher">อาจารย์</option>            <span>🚪</span> ออกจากระบบ        <select id="respondent">
-
-              <option value="committee">กรรมการ</option>
-
-              <option value="student">นิสิต/นักศึกษา</option>          </button>          <option value="">ทั้งหมด</option>
-
-              <option value="other">อื่นๆ</option>
-
-            </select>        </form>          <option value="expert">ผู้ทรงคุณวุฒิ</option>
-
-          </div>
-
-          <div class="filter-actions">        <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">          <option value="teacher">อาจารย์</option>
-
-            <button id="refreshBtn" class="btn btn-primary">
-
-              <span>🔄</span> รีเฟรช          <span class="icon" data-icon-sun>☀️</span>          <option value="committee">กรรมการ</option>
-
-            </button>
-
-            <button id="exportCsv" class="btn btn-secondary">          <span class="icon" data-icon-moon hidden>🌙</span>          <option value="student">นิสิต/นักศึกษา</option>
-
-              <span>📊</span> Export CSV
-
-            </button>        </button>          <option value="other">อื่นๆ</option>
-
-          </div>
-
-        </div>      </nav>        </select>
-
-      </div>
-
-    </section>    </div>      </label>
-
-
-
-    <!-- สถิติรวม -->  </div>    </div>
-
-    <section class="stats-section">
-
-      <h3>📈 สถิติสรุป</h3></header>    <div class="actions">
-
-      <div class="stats-grid" id="statsContainer">
-
-        <div class="stat-card" data-stat="avg">      <button id="exportCsv" class="btn">Export CSV</button>
-
-          <div class="stat-icon">📊</div>
-
-          <div class="stat-content"><main class="main-content">    </div>
-
-            <span class="stat-label">คะแนนเฉลี่ย</span>
-
-            <span class="stat-value" id="avg">-</span>  <div class="container">  </section>
-
-            <span class="stat-unit">คะแนน</span>
-
-          </div>    <!-- คำอธิบายและตัวกรอง -->
-
-        </div>
-
-        <div class="stat-card" data-stat="median">    <section class="intro-section">  <section class="card">
-
-          <div class="stat-icon">📏</div>
-
-          <div class="stat-content">      <div class="intro-card">    <h2 class="card-title">สถิติรวม</h2>
-
-            <span class="stat-label">ค่ามัธยฐาน</span>
-
-            <span class="stat-value" id="median">-</span>        <h2>ยินดีต้อนรับสู่แดชบอร์ด</h2>    <div class="stats" id="statsContainer">
-
-            <span class="stat-unit">คะแนน</span>
-
-          </div>        <p>สรุปข้อมูลและวิเคราะห์ผลการประเมินแบบเรียลไทม์</p>      <div><strong>เฉลี่ย:</strong> <span id="avg">-</span></div>
-
-        </div>
-
-        <div class="stat-card" data-stat="std">      </div>      <div><strong>มัธยฐาน:</strong> <span id="median">-</span></div>
-
-          <div class="stat-icon">📐</div>
-
-          <div class="stat-content">            <div><strong>ส่วนเบี่ยงเบน:</strong> <span id="std">-</span></div>
-
-            <span class="stat-label">ส่วนเบี่ยงเบนมาตรฐาน</span>
-
-            <span class="stat-value" id="std">-</span>      <div class="filters-card">      <div><strong>จำนวนแบบ:</strong> <span id="count">-</span></div>
-
-            <span class="stat-unit">คะแนน</span>
-
-          </div>        <h3>🔍 ตัวกรองข้อมูล</h3>    </div>
-
-        </div>
-
-        <div class="stat-card" data-stat="count">        <div class="filters-grid">  </section>
-
-          <div class="stat-icon">📝</div>
-
-          <div class="stat-content">          <div class="filter-group">
-
-            <span class="stat-label">จำนวนผู้ตอบ</span>
-
-            <span class="stat-value" id="count">-</span>            <label>📅 ช่วงเวลา เริ่ม</label>  <section class="card">
-
-            <span class="stat-unit">คน</span>
-
-          </div>            <input type="datetime-local" id="from" class="modern-input">    <h2 class="card-title">กราฟ</h2>
-
-        </div>
-
-      </div>          </div>    <div class="chart-grid">
-
-    </section>
-
-          <div class="filter-group">      <div class="chart-panel chart-panel-wide" id="barChartPanel">
-
-    <!-- กราฟและแผนภูมิ -->
-
-    <section class="charts-section">            <label>📅 ถึง</label>        <h3 class="chart-title">คะแนนเฉลี่ยต่อข้อ</h3>
-
-      <div class="charts-grid">
-
-        <!-- กราฟคะแนนเฉลี่ยต่อข้อ -->            <input type="datetime-local" id="to" class="modern-input">        <div class="chart-scroll">
-
-        <div class="chart-card chart-wide" id="barChartCard">
-
-          <div class="chart-header">          </div>          <canvas id="bar" width="800" height="260"></canvas>
-
-            <h4>📊 คะแนนเฉลี่ยต่อข้อ</h4>
-
-          </div>          <div class="filter-group">        </div>
-
-          <div class="chart-container">
-
-            <canvas id="barChart"></canvas>            <label>👥 ประเภทผู้ตอบ</label>      </div>
-
-          </div>
-
-        </div>            <select id="respondent" class="modern-select">      <div class="chart-panel" id="radarChartPanel">
-
-
-
-        <!-- กราฟเรดาร์ -->              <option value="">ทั้งหมด</option>        <h3 class="chart-title">คะแนนเฉลี่ยตามมิติ</h3>
-
-        <div class="chart-card" id="radarChartCard">
-
-          <div class="chart-header">              <option value="expert">ผู้ทรงคุณวุฒิ</option>        <canvas id="radar" width="420" height="260"></canvas>
-
-            <h4>🎯 คะแนนตามมิติ</h4>
-
-          </div>              <option value="teacher">อาจารย์</option>      </div>
-
-          <div class="chart-container">
-
-            <canvas id="radarChart"></canvas>              <option value="committee">กรรมการ</option>      <div class="chart-panel" id="donutChartPanel">
-
-          </div>
-
-        </div>              <option value="student">นิสิต/นักศึกษา</option>        <h3 class="chart-title">สัดส่วนผู้ตอบ</h3>
-
-
-
-        <!-- กราฟโดนัท -->              <option value="other">อื่นๆ</option>        <canvas id="donut" width="320" height="220"></canvas>
-
-        <div class="chart-card" id="donutChartCard">
-
-          <div class="chart-header">            </select>      </div>
-
-            <h4>🥧 สัดส่วนผู้ตอบ</h4>
-
-          </div>          </div>    </div>
-
-          <div class="chart-container">
-
-            <canvas id="donutChart"></canvas>          <div class="filter-actions">  </section>
-
-          </div>
-
-        </div>            <button id="refreshBtn" class="btn btn-primary">
-
-      </div>
-
-    </section>              <span>🔄</span> รีเฟรช  <section class="card">
-
-
-
-    <!-- ข้อเสนอแนะ -->            </button>    <h2 class="card-title">ข้อเสนอแนะ (ล่าสุด)</h2>
-
-    <section class="suggestions-section">
-
-      <div class="suggestions-card">            <button id="exportCsv" class="btn btn-secondary">    <div id="suggestions" class="list"></div>
-
-        <div class="suggestions-header">
-
-          <h3>💭 ข้อเสนอแนะล่าสุด</h3>              <span>📊</span> Export CSV  </section>
-
-          <span class="suggestions-count" id="suggestionsCount">0 รายการ</span>
-
-        </div>            </button></main>
-
-        <div class="suggestions-container" id="suggestions">
-
-          <div class="loading-suggestions">          </div><div id="toast" class="toast" hidden></div>
-
-            <div class="loading-spinner"></div>
-
-            <span>กำลังโหลดข้อเสนอแนะ...</span>        </div><script src="/assets/js/app.js"></script>
-
-          </div>
-
-        </div>      </div><script>
-
-      </div>
-
-    </section>    </section>const qs = (s)=>document.querySelector(s);
+    </div>        <a class="nav-btn" href="/index.php">
 
   </div>
 
-</main>const qsa = (s)=>Array.from(document.querySelectorAll(s));
+</header>          <span>📝</span> หน้าแบบประเมิน  <link rel="stylesheet" href="/assets/css/styles.css">  <link rel="stylesheet" href="/assets/css/styles.css">
 
 
 
-<!-- Toast Notifications -->    <!-- สถิติรวม -->const barCanvas = document.getElementById('bar');
+<main class="main-content">        </a>
 
-<div id="toast" class="toast hidden"></div>
+  <div class="container">
 
-    <section class="stats-section">const radarCanvas = document.getElementById('radar');
+    <!-- คำอธิบายและตัวกรอง -->        <form method="post" action="/logout.php" class="inline">  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script></head>
 
-<!-- Loading Overlay -->
+    <section class="intro-section">
 
-<div id="globalLoading" class="global-loading hidden">      <h3>📈 สถิติสรุป</h3>const donutCanvas = document.getElementById('donut');
+      <div class="intro-card">          <?=csrf_token_input()?>
 
-  <div class="loading-content">
+        <h2>ยินดีต้อนรับสู่แดชบอร์ด</h2>
 
-    <div class="loading-spinner large"></div>      <div class="stats-grid" id="statsContainer">const suggestionsBox = document.getElementById('suggestions');
+        <p>สรุปข้อมูลและวิเคราะห์ผลการประเมินแบบเรียลไทม์</p>          <button class="nav-btn logout" type="submit">  <link rel="preconnect" href="https://fonts.googleapis.com"><body>
 
-    <span>กำลังโหลดข้อมูล...</span>
+      </div>
 
-  </div>        <div class="stat-card" data-stat="avg">if (suggestionsBox && !suggestionsBox.textContent.trim()) {
+                  <span>🚪</span> ออกจากระบบ
 
-</div>
+      <div class="filters-card">
 
-          <div class="stat-icon">📊</div>  suggestionsBox.textContent = 'กำลังโหลด...';
+        <h3>🔍 ตัวกรองข้อมูล</h3>          </button>  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><header class="topbar">
 
-<script>
+        <div class="filters-grid">
 
-// ตัวแปรสำหรับเก็บ Chart instances          <div class="stat-content">}
+          <div class="filter-group">        </form>
 
-let barChart = null;
+            <label>📅 ช่วงเวลา เริ่ม</label>
 
-let radarChart = null;            <span class="stat-label">คะแนนเฉลี่ย</span>
+            <input type="datetime-local" id="from" class="modern-input">        <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">  <div class="brand">แดชบอร์ดสรุปผล</div>
 
-let donutChart = null;
+          </div>
 
-            <span class="stat-value" id="avg">-</span>const statsTargets = {
+          <div class="filter-group">          <span class="icon" data-icon-sun>☀️</span>
 
-// การจัดการ DOM elements
+            <label>📅 ถึง</label>
 
-const elements = {            <span class="stat-unit">คะแนน</span>  avg: qs('#avg'),
+            <input type="datetime-local" id="to" class="modern-input">          <span class="icon" data-icon-moon hidden">🌙</span></head>  <nav>
 
-  stats: {
+          </div>
 
-    avg: document.getElementById('avg'),          </div>  median: qs('#median'),
+          <div class="filter-group">        </button>
 
-    median: document.getElementById('median'),
+            <label>👥 ประเภทผู้ตอบ</label>
 
-    std: document.getElementById('std'),        </div>  std: qs('#std'),
+            <select id="respondent" class="modern-select">      </nav><body>    <a class="btn" href="/index.php">หน้าแบบประเมิน</a>
 
-    count: document.getElementById('count')
+              <option value="">ทั้งหมด</option>
 
-  },        <div class="stat-card" data-stat="median">  count: qs('#count')
+              <option value="expert">ผู้ทรงคุณวุฒิ</option>    </div>
 
-  filters: {
+              <option value="teacher">อาจารย์</option>
 
-    from: document.getElementById('from'),          <div class="stat-icon">📏</div>};
+              <option value="committee">กรรมการ</option>  </div><header class="modern-header">    <form method="post" action="/logout.php" class="inline"><?=csrf_token_input()?><button class="btn" type="submit">ออกจากระบบ</button></form>
 
-    to: document.getElementById('to'),
+              <option value="student">นิสิต/นักศึกษา</option>
 
-    respondent: document.getElementById('respondent')          <div class="stat-content">
+              <option value="other">อื่นๆ</option></header>
+
+            </select>
+
+          </div>  <div class="container">    <button id="themeToggle" class="icon-btn" aria-label="Toggle theme">
+
+          <div class="filter-actions">
+
+            <button id="refreshBtn" class="btn btn-primary"><main class="main-content">
+
+              <span>🔄</span> รีเฟรช
+
+            </button>  <div class="container">    <div class="header-content">      <span class="icon" data-icon-sun>☀</span>
+
+            <button id="exportCsv" class="btn btn-secondary">
+
+              <span>📊</span> Export CSV    <!-- คำอธิบายและตัวกรอง -->
+
+            </button>
+
+          </div>    <section class="intro-section">      <div class="brand">      <span class="icon" data-icon-moon hidden>🌙</span>
+
+        </div>
+
+      </div>      <div class="intro-card">
+
+    </section>
+
+        <h2>ยินดีต้อนรับสู่แดชบอร์ด</h2>        <span class="brand-icon">📊</span>    </button>
+
+    <!-- สถิติรวม -->
+
+    <section class="stats-section">        <p>สรุปข้อมูลและวิเคราะห์ผลการประเมินแบบเรียลไทม์</p>
+
+      <h3>📈 สถิติสรุป</h3>
+
+      <div class="stats-grid" id="statsContainer">      </div>        <h1>แดชบอร์ดสรุปผล</h1>  </nav>
+
+        <div class="stat-card" data-stat="avg">
+
+          <div class="stat-icon">📊</div>      
+
+          <div class="stat-content">
+
+            <span class="stat-label">คะแนนเฉลี่ย</span>      <div class="filters-card">      </div></header>
+
+            <span class="stat-value" id="avg">-</span>
+
+            <span class="stat-unit">คะแนน</span>        <h3>🔍 ตัวกรองข้อมูล</h3>
+
+          </div>
+
+        </div>        <div class="filters-grid">      <nav class="header-nav"><main class="container">
+
+        <div class="stat-card" data-stat="median">
+
+          <div class="stat-icon">📏</div>          <div class="filter-group">
+
+          <div class="stat-content">
+
+            <span class="stat-label">ค่ามัธยฐาน</span>            <label>📅 ช่วงเวลา เริ่ม</label>        <a class="nav-btn" href="/index.php">  <section class="card">
+
+            <span class="stat-value" id="median">-</span>
+
+            <span class="stat-unit">คะแนน</span>            <input type="datetime-local" id="from" class="modern-input">
+
+          </div>
+
+        </div>          </div>          <span>📝</span> หน้าแบบประเมิน    <h2 class="card-title">ตัวกรอง</h2>
+
+        <div class="stat-card" data-stat="std">
+
+          <div class="stat-icon">📐</div>          <div class="filter-group">
+
+          <div class="stat-content">
+
+            <span class="stat-label">ส่วนเบี่ยงเบนมาตรฐาน</span>            <label>📅 ถึง</label>        </a>    <div class="filters">
+
+            <span class="stat-value" id="std">-</span>
+
+            <span class="stat-unit">คะแนน</span>            <input type="datetime-local" id="to" class="modern-input">
+
+          </div>
+
+        </div>          </div>        <form method="post" action="/logout.php" class="inline">      <label>ช่วงเวลา เริ่ม <input type="datetime-local" id="from"></label>
+
+        <div class="stat-card" data-stat="count">
+
+          <div class="stat-icon">📝</div>          <div class="filter-group">
+
+          <div class="stat-content">
+
+            <span class="stat-label">จำนวนผู้ตอบ</span>            <label>👥 ประเภทผู้ตอบ</label>          <?=csrf_token_input()?>      <label>ถึง <input type="datetime-local" id="to"></label>
+
+            <span class="stat-value" id="count">-</span>
+
+            <span class="stat-unit">คน</span>            <select id="respondent" class="modern-select">
+
+          </div>
+
+        </div>              <option value="">ทั้งหมด</option>          <button class="nav-btn logout" type="submit">      <label>ประเภทผู้ตอบ
+
+      </div>
+
+    </section>              <option value="expert">ผู้ทรงคุณวุฒิ</option>
+
+
+
+    <!-- กราฟและแผนภูมิ -->              <option value="teacher">อาจารย์</option>            <span>🚪</span> ออกจากระบบ        <select id="respondent">
+
+    <section class="charts-section">
+
+      <div class="charts-grid">              <option value="committee">กรรมการ</option>
+
+        <!-- กราฟคะแนนเฉลี่ยต่อข้อ -->
+
+        <div class="chart-card chart-wide" id="barChartCard">              <option value="student">นิสิต/นักศึกษา</option>          </button>          <option value="">ทั้งหมด</option>
+
+          <div class="chart-header">
+
+            <h4>📊 คะแนนเฉลี่ยต่อข้อ</h4>              <option value="other">อื่นๆ</option>
+
+          </div>
+
+          <div class="chart-container">            </select>        </form>          <option value="expert">ผู้ทรงคุณวุฒิ</option>
+
+            <canvas id="barChart"></canvas>
+
+          </div>          </div>
+
+        </div>
+
+          <div class="filter-actions">        <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">          <option value="teacher">อาจารย์</option>
+
+        <!-- กราฟเรดาร์ -->
+
+        <div class="chart-card" id="radarChartCard">            <button id="refreshBtn" class="btn btn-primary">
+
+          <div class="chart-header">
+
+            <h4>🎯 คะแนนตามมิติ</h4>              <span>🔄</span> รีเฟรช          <span class="icon" data-icon-sun>☀️</span>          <option value="committee">กรรมการ</option>
+
+          </div>
+
+          <div class="chart-container">            </button>
+
+            <canvas id="radarChart"></canvas>
+
+          </div>            <button id="exportCsv" class="btn btn-secondary">          <span class="icon" data-icon-moon hidden>🌙</span>          <option value="student">นิสิต/นักศึกษา</option>
+
+        </div>
+
+              <span>📊</span> Export CSV
+
+        <!-- กราฟโดนัท -->
+
+        <div class="chart-card" id="donutChartCard">            </button>        </button>          <option value="other">อื่นๆ</option>
+
+          <div class="chart-header">
+
+            <h4>🥧 สัดส่วนผู้ตอบ</h4>          </div>
+
+          </div>
+
+          <div class="chart-container">        </div>      </nav>        </select>
+
+            <canvas id="donutChart"></canvas>
+
+          </div>      </div>
+
+        </div>
+
+      </div>    </section>    </div>      </label>
+
+    </section>
+
+
+
+    <!-- ข้อเสนอแนะ -->
+
+    <section class="suggestions-section">    <!-- สถิติรวม -->  </div>    </div>
+
+      <div class="suggestions-card">
+
+        <div class="suggestions-header">    <section class="stats-section">
+
+          <h3>💭 ข้อเสนอแนะล่าสุด</h3>
+
+          <span class="suggestions-count" id="suggestionsCount">0 รายการ</span>      <h3>📈 สถิติสรุป</h3></header>    <div class="actions">
+
+        </div>
+
+        <div class="suggestions-container" id="suggestions">      <div class="stats-grid" id="statsContainer">
+
+          <div class="loading-suggestions">
+
+            <div class="loading-spinner"></div>        <div class="stat-card" data-stat="avg">      <button id="exportCsv" class="btn">Export CSV</button>
+
+            <span>กำลังโหลดข้อเสนอแนะ...</span>
+
+          </div>          <div class="stat-icon">📊</div>
+
+        </div>
+
+      </div>          <div class="stat-content"><main class="main-content">    </div>
+
+    </section>
+
+  </div>            <span class="stat-label">คะแนนเฉลี่ย</span>
+
+</main>
+
+            <span class="stat-value" id="avg">-</span>  <div class="container">  </section>
+
+<!-- Toast Notifications -->
+
+<div id="toast" class="toast hidden"></div>            <span class="stat-unit">คะแนน</span>
+
+
+
+<!-- Loading Overlay -->          </div>    <!-- คำอธิบายและตัวกรอง -->
+
+<div id="globalLoading" class="global-loading hidden">
+
+  <div class="loading-content">        </div>
+
+    <div class="loading-spinner large"></div>
+
+    <span>กำลังโหลดข้อมูล...</span>        <div class="stat-card" data-stat="median">    <section class="intro-section">  <section class="card">
+
+  </div>
+
+</div>          <div class="stat-icon">📏</div>
+
+
+
+<script>          <div class="stat-content">      <div class="intro-card">    <h2 class="card-title">สถิติรวม</h2>
+
+// ตัวแปรสำหรับเก็บ Chart instances
+
+let barChart = null;            <span class="stat-label">ค่ามัธยฐาน</span>
+
+let radarChart = null;
+
+let donutChart = null;            <span class="stat-value" id="median">-</span>        <h2>ยินดีต้อนรับสู่แดชบอร์ด</h2>    <div class="stats" id="statsContainer">
+
+
+
+// การจัดการ DOM elements            <span class="stat-unit">คะแนน</span>
+
+const elements = {
+
+  stats: {          </div>        <p>สรุปข้อมูลและวิเคราะห์ผลการประเมินแบบเรียลไทม์</p>      <div><strong>เฉลี่ย:</strong> <span id="avg">-</span></div>
+
+    avg: document.getElementById('avg'),
+
+    median: document.getElementById('median'),        </div>
+
+    std: document.getElementById('std'),
+
+    count: document.getElementById('count')        <div class="stat-card" data-stat="std">      </div>      <div><strong>มัธยฐาน:</strong> <span id="median">-</span></div>
 
   },
 
-  suggestions: document.getElementById('suggestions'),            <span class="stat-label">ค่ามัธยฐาน</span>const formatStat = (val)=> (typeof val === 'number' && Number.isFinite(val)) ? val.toFixed(2) : '-';
+  filters: {          <div class="stat-icon">📐</div>
 
-  suggestionsCount: document.getElementById('suggestionsCount'),
+    from: document.getElementById('from'),
 
-  refreshBtn: document.getElementById('refreshBtn'),            <span class="stat-value" id="median">-</span>const formatCount = (val)=> (typeof val === 'number' && Number.isFinite(val)) ? val : '-';
+    to: document.getElementById('to'),          <div class="stat-content">            <div><strong>ส่วนเบี่ยงเบน:</strong> <span id="std">-</span></div>
 
-  exportBtn: document.getElementById('exportCsv')
+    respondent: document.getElementById('respondent')
 
-};            <span class="stat-unit">คะแนน</span>let statsErrorShown = false;
+  },            <span class="stat-label">ส่วนเบี่ยงเบนมาตรฐาน</span>
 
+  suggestions: document.getElementById('suggestions'),
 
+  suggestionsCount: document.getElementById('suggestionsCount'),            <span class="stat-value" id="std">-</span>      <div class="filters-card">      <div><strong>จำนวนแบบ:</strong> <span id="count">-</span></div>
 
-// ฟังก์ชันช่วยเหลือ          </div>let suggestionsErrorShown = false;
+  refreshBtn: document.getElementById('refreshBtn'),
 
-const formatNumber = (num) => {
+  exportBtn: document.getElementById('exportCsv')            <span class="stat-unit">คะแนน</span>
 
-  if (typeof num !== 'number' || !Number.isFinite(num)) return '-';        </div>
+};
 
-  return num.toLocaleString('th-TH', { maximumFractionDigits: 2 });
+          </div>        <h3>🔍 ตัวกรองข้อมูล</h3>    </div>
 
-};        <div class="stat-card" data-stat="std">const filters = ()=>({
+// ฟังก์ชันช่วยเหลือ
 
+const formatNumber = (num) => {        </div>
 
+  if (typeof num !== 'number' || !Number.isFinite(num)) return '-';
 
-const showToast = (message, type = 'info') => {          <div class="stat-icon">📐</div>  from: qs('#from')?.value || '',
+  return num.toLocaleString('th-TH', { maximumFractionDigits: 2 });        <div class="stat-card" data-stat="count">        <div class="filters-grid">  </section>
 
-  const toast = document.getElementById('toast');
+};
 
-  toast.textContent = message;          <div class="stat-content">  to: qs('#to')?.value || '',
+          <div class="stat-icon">📝</div>
 
-  toast.className = `toast ${type}`;
+const showToast = (message, type = 'info') => {
 
-  toast.classList.remove('hidden');            <span class="stat-label">ส่วนเบี่ยงเบนมาตรฐาน</span>  respondent: qs('#respondent')?.value || ''
+  const toast = document.getElementById('toast');          <div class="stat-content">          <div class="filter-group">
 
-  toast.classList.add('show');
+  toast.textContent = message;
 
-  setTimeout(() => {            <span class="stat-value" id="std">-</span>});
+  toast.className = `toast ${type}`;            <span class="stat-label">จำนวนผู้ตอบ</span>
 
-    toast.classList.remove('show');
+  toast.classList.remove('hidden');
 
-    setTimeout(() => toast.classList.add('hidden'), 400);            <span class="stat-unit">คะแนน</span>
+  toast.classList.add('show');            <span class="stat-value" id="count">-</span>            <label>📅 ช่วงเวลา เริ่ม</label>  <section class="card">
 
-  }, 4000);
+  setTimeout(() => {
 
-};          </div>function applySummary(summary){
+    toast.classList.remove('show');            <span class="stat-unit">คน</span>
 
+    setTimeout(() => toast.classList.add('hidden'), 400);
 
+  }, 4000);          </div>            <input type="datetime-local" id="from" class="modern-input">    <h2 class="card-title">กราฟ</h2>
 
-const showGlobalLoading = () => {        </div>  if (statsTargets.avg) statsTargets.avg.textContent = formatStat(summary.avg);
+};
 
-  document.getElementById('globalLoading').classList.remove('hidden');
+        </div>
 
-};        <div class="stat-card" data-stat="count">  if (statsTargets.median) statsTargets.median.textContent = formatStat(summary.median);
+const showGlobalLoading = () => {
 
+  document.getElementById('globalLoading').classList.remove('hidden');      </div>          </div>    <div class="chart-grid">
 
+};
 
-const hideGlobalLoading = () => {          <div class="stat-icon">📝</div>  if (statsTargets.std) statsTargets.std.textContent = formatStat(summary.stddev);
+    </section>
 
-  document.getElementById('globalLoading').classList.add('hidden');
+const hideGlobalLoading = () => {
 
-};          <div class="stat-content">  if (statsTargets.count) statsTargets.count.textContent = formatCount(summary.count);
+  document.getElementById('globalLoading').classList.add('hidden');          <div class="filter-group">      <div class="chart-panel chart-panel-wide" id="barChartPanel">
 
+};
 
+    <!-- กราฟและแผนภูมิ -->
 
-// ฟังก์ชันสำหรับอัพเดตสถิติ            <span class="stat-label">จำนวนผู้ตอบ</span>}
+// ฟังก์ชันสำหรับอัพเดตสถิติ
 
-const updateStats = (data) => {
+const updateStats = (data) => {    <section class="charts-section">            <label>📅 ถึง</label>        <h3 class="chart-title">คะแนนเฉลี่ยต่อข้อ</h3>
 
-  if (!data) return;            <span class="stat-value" id="count">-</span>
+  if (!data) return;
 
-  
+        <div class="charts-grid">
 
-  elements.stats.avg.textContent = formatNumber(data.avg);            <span class="stat-unit">คน</span>function resetSummary(){
+  elements.stats.avg.textContent = formatNumber(data.avg);
 
-  elements.stats.median.textContent = formatNumber(data.median);
+  elements.stats.median.textContent = formatNumber(data.median);        <!-- กราฟคะแนนเฉลี่ยต่อข้อ -->            <input type="datetime-local" id="to" class="modern-input">        <div class="chart-scroll">
 
-  elements.stats.std.textContent = formatNumber(data.stddev);          </div>  Object.values(statsTargets).forEach(el=>{ if (el) el.textContent = '-'; });
+  elements.stats.std.textContent = formatNumber(data.stddev);
 
-  elements.stats.count.textContent = formatNumber(data.count);
-
-          </div>}
-
-  // เพิ่ม animation
-
-  Object.values(elements.stats).forEach(el => {      </div>
-
-    if (el && el.parentElement) {
-
-      el.parentElement.classList.add('stat-updated');    </section>function chartMessage(ctx, message, width, height){
-
-      setTimeout(() => el.parentElement.classList.remove('stat-updated'), 600);
-
-    }  ctx.clearRect(0,0,width,height);
-
-  });
-
-};    <!-- กราฟและแผนภูมิ -->  ctx.save();
-
-
-
-// ฟังก์ชันสำหรับสร้างกราฟแท่ง    <section class="charts-section">  ctx.fillStyle = '#94a3b8';
-
-const createBarChart = (data) => {
-
-  const ctx = document.getElementById('barChart').getContext('2d');      <div class="charts-grid">  ctx.font = '14px system-ui';
+  elements.stats.count.textContent = formatNumber(data.count);        <div class="chart-card chart-wide" id="barChartCard">
 
   
 
-  if (barChart) {        <!-- กราฟคะแนนเฉลี่ยต่อข้อ -->  ctx.textAlign = 'center';
+  // เพิ่ม animation          <div class="chart-header">          </div>          <canvas id="bar" width="800" height="260"></canvas>
+
+  Object.values(elements.stats).forEach(el => {
+
+    if (el && el.parentElement) {            <h4>📊 คะแนนเฉลี่ยต่อข้อ</h4>
+
+      el.parentElement.classList.add('stat-updated');
+
+      setTimeout(() => el.parentElement.classList.remove('stat-updated'), 600);          </div>          <div class="filter-group">        </div>
+
+    }
+
+  });          <div class="chart-container">
+
+};
+
+            <canvas id="barChart"></canvas>            <label>👥 ประเภทผู้ตอบ</label>      </div>
+
+// ฟังก์ชันสำหรับสร้างกราฟแท่ง
+
+const createBarChart = (data) => {          </div>
+
+  const ctx = document.getElementById('barChart').getContext('2d');
+
+          </div>            <select id="respondent" class="modern-select">      <div class="chart-panel" id="radarChartPanel">
+
+  if (barChart) {
 
     barChart.destroy();
 
-  }        <div class="chart-card chart-wide" id="barChartCard">  ctx.textBaseline = 'middle';
+  }
+
+          <!-- กราฟเรดาร์ -->              <option value="">ทั้งหมด</option>        <h3 class="chart-title">คะแนนเฉลี่ยตามมิติ</h3>
+
+  if (!data || data.length === 0) {
+
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);        <div class="chart-card" id="radarChartCard">
+
+    ctx.font = '16px Inter';
+
+    ctx.fillStyle = '#64748b';          <div class="chart-header">              <option value="expert">ผู้ทรงคุณวุฒิ</option>        <canvas id="radar" width="420" height="260"></canvas>
+
+    ctx.textAlign = 'center';
+
+    ctx.fillText('📊 ไม่มีข้อมูลสำหรับแสดงผล', ctx.canvas.width/2, ctx.canvas.height/2);            <h4>🎯 คะแนนตามมิติ</h4>
+
+    return;
+
+  }          </div>              <option value="teacher">อาจารย์</option>      </div>
 
   
 
-  if (!data || data.length === 0) {          <div class="chart-header">  ctx.fillText(message, width/2, height/2);
+  barChart = new Chart(ctx, {          <div class="chart-container">
 
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    type: 'bar',
 
-    ctx.font = '16px Inter';            <h4>📊 คะแนนเฉลี่ยต่อข้อ</h4>  ctx.restore();
+    data: {            <canvas id="radarChart"></canvas>              <option value="committee">กรรมการ</option>      <div class="chart-panel" id="donutChartPanel">
 
-    ctx.fillStyle = '#64748b';
+      labels: data.map(item => item.code),
 
-    ctx.textAlign = 'center';            <div class="chart-controls">}
+      datasets: [{          </div>
 
-    ctx.fillText('📊 ไม่มีข้อมูลสำหรับแสดงผล', ctx.canvas.width/2, ctx.canvas.height/2);
+        label: 'คะแนนเฉลี่ย',
 
-    return;              <button class="chart-btn" onclick="toggleChartView('bar')">📱</button>
+        data: data.map(item => item.avg),        </div>              <option value="student">นิสิต/นักศึกษา</option>        <h3 class="chart-title">สัดส่วนผู้ตอบ</h3>
 
-  }
-
-              </div>function showLoading(container) {
-
-  barChart = new Chart(ctx, {
-
-    type: 'bar',          </div>  if (!container) return;
-
-    data: {
-
-      labels: data.map(item => item.code),          <div class="chart-container">  const overlay = document.createElement('div');
-
-      datasets: [{
-
-        label: 'คะแนนเฉลี่ย',            <canvas id="barChart"></canvas>  overlay.className = 'loading-overlay';
-
-        data: data.map(item => item.avg),
-
-        backgroundColor: 'rgba(99, 102, 241, 0.8)',          </div>  overlay.innerHTML = '<div class="loading-text"><div class="loading-spinner"></div>กำลังโหลด...</div>';
+        backgroundColor: 'rgba(99, 102, 241, 0.8)',
 
         borderColor: 'rgba(99, 102, 241, 1)',
 
-        borderWidth: 2,        </div>  container.style.position = 'relative';
+        borderWidth: 2,
 
-        borderRadius: 8,
+        borderRadius: 8,        <!-- กราฟโดนัท -->              <option value="other">อื่นๆ</option>        <canvas id="donut" width="320" height="220"></canvas>
 
-        borderSkipped: false,  container.appendChild(overlay);
+        borderSkipped: false,
 
-      }]
+      }]        <div class="chart-card" id="donutChartCard">
 
-    },        <!-- กราฟเรดาร์ -->}
+    },
 
-    options: {
+    options: {          <div class="chart-header">            </select>      </div>
 
-      responsive: true,        <div class="chart-card" id="radarChartCard">
+      responsive: true,
 
-      maintainAspectRatio: false,
+      maintainAspectRatio: false,            <h4>🥧 สัดส่วนผู้ตอบ</h4>
 
-      plugins: {          <div class="chart-header">function hideLoading(container) {
+      plugins: {
 
-        legend: {
+        legend: {          </div>          </div>    </div>
 
-          display: false            <h4>🎯 คะแนนตามมิติ</h4>  if (!container) return;
+          display: false
 
-        },
+        },          <div class="chart-container">
 
-        tooltip: {          </div>  const overlay = container.querySelector('.loading-overlay');
+        tooltip: {
 
-          backgroundColor: 'rgba(15, 23, 42, 0.9)',
+          backgroundColor: 'rgba(15, 23, 42, 0.9)',            <canvas id="donutChart"></canvas>          <div class="filter-actions">  </section>
 
-          titleColor: '#f1f5f9',          <div class="chart-container">  if (overlay) {
+          titleColor: '#f1f5f9',
 
-          bodyColor: '#f1f5f9',
+          bodyColor: '#f1f5f9',          </div>
 
-          borderColor: 'rgba(99, 102, 241, 0.5)',            <canvas id="radarChart"></canvas>    overlay.style.opacity = '0';
+          borderColor: 'rgba(99, 102, 241, 0.5)',
 
-          borderWidth: 1,
+          borderWidth: 1,        </div>            <button id="refreshBtn" class="btn btn-primary">
 
-          cornerRadius: 8,          </div>    setTimeout(() => overlay.remove(), 200);
+          cornerRadius: 8,
 
-          callbacks: {
+          callbacks: {      </div>
 
-            label: function(context) {        </div>  }
+            label: function(context) {
 
-              return `คะแนน: ${context.parsed.y.toFixed(2)}`;
-
-            }}
-
-          }
-
-        }        <!-- กราฟโดนัท -->
-
-      },
-
-      scales: {        <div class="chart-card" id="donutChartCard">function showSkeletonStats() {
-
-        y: {
-
-          beginAtZero: true,          <div class="chart-header">  const statsContainer = document.getElementById('statsContainer');
-
-          max: 5,
-
-          grid: {            <h4>🥧 สัดส่วนผู้ตอบ</h4>  if (!statsContainer) return;
-
-            color: 'rgba(148, 163, 184, 0.1)'
-
-          },          </div>  statsContainer.classList.add('skeleton');
-
-          ticks: {
-
-            color: '#64748b',          <div class="chart-container">}
-
-            font: {
-
-              family: 'Inter'            <canvas id="donutChart"></canvas>
+              return `คะแนน: ${context.parsed.y.toFixed(2)}`;    </section>              <span>🔄</span> รีเฟรช  <section class="card">
 
             }
 
-          }          </div>function hideSkeletonStats() {
+          }
 
-        },
+        }
 
-        x: {        </div>  const statsContainer = document.getElementById('statsContainer');
+      },    <!-- ข้อเสนอแนะ -->            </button>    <h2 class="card-title">ข้อเสนอแนะ (ล่าสุด)</h2>
+
+      scales: {
+
+        y: {    <section class="suggestions-section">
+
+          beginAtZero: true,
+
+          max: 5,      <div class="suggestions-card">            <button id="exportCsv" class="btn btn-secondary">    <div id="suggestions" class="list"></div>
 
           grid: {
 
-            display: false      </div>  if (!statsContainer) return;
+            color: 'rgba(148, 163, 184, 0.1)'        <div class="suggestions-header">
 
           },
 
-          ticks: {    </section>  statsContainer.classList.remove('skeleton');
+          ticks: {          <h3>💭 ข้อเสนอแนะล่าสุด</h3>              <span>📊</span> Export CSV  </section>
 
+            color: '#64748b',
+
+            font: {          <span class="suggestions-count" id="suggestionsCount">0 รายการ</span>
+
+              family: 'Inter'
+
+            }        </div>            </button></main>
+
+          }
+
+        },        <div class="suggestions-container" id="suggestions">
+
+        x: {
+
+          grid: {          <div class="loading-suggestions">          </div><div id="toast" class="toast" hidden></div>
+
+            display: false
+
+          },            <div class="loading-spinner"></div>
+
+          ticks: {
+
+            color: '#64748b',            <span>กำลังโหลดข้อเสนอแนะ...</span>        </div><script src="/assets/js/app.js"></script>
+
+            font: {
+
+              family: 'Inter'          </div>
+
+            },
+
+            maxRotation: 45        </div>      </div><script>
+
+          }
+
+        }      </div>
+
+      },
+
+      animation: {    </section>    </section>const qs = (s)=>document.querySelector(s);
+
+        duration: 1000,
+
+        easing: 'easeOutQuart'  </div>
+
+      }
+
+    }</main>const qsa = (s)=>Array.from(document.querySelectorAll(s));
+
+  });
+
+};
+
+
+
+// ฟังก์ชันสำหรับสร้างกราฟเรดาร์<!-- Toast Notifications -->    <!-- สถิติรวม -->const barCanvas = document.getElementById('bar');
+
+const createRadarChart = (data) => {
+
+  const ctx = document.getElementById('radarChart').getContext('2d');<div id="toast" class="toast hidden"></div>
+
+  
+
+  if (radarChart) {    <section class="stats-section">const radarCanvas = document.getElementById('radar');
+
+    radarChart.destroy();
+
+  }<!-- Loading Overlay -->
+
+  
+
+  const entries = Object.entries(data || {});<div id="globalLoading" class="global-loading hidden">      <h3>📈 สถิติสรุป</h3>const donutCanvas = document.getElementById('donut');
+
+  if (entries.length === 0) {
+
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);  <div class="loading-content">
+
+    ctx.font = '14px Inter';
+
+    ctx.fillStyle = '#64748b';    <div class="loading-spinner large"></div>      <div class="stats-grid" id="statsContainer">const suggestionsBox = document.getElementById('suggestions');
+
+    ctx.textAlign = 'center';
+
+    ctx.fillText('🎯 ไม่มีข้อมูลมิติ', ctx.canvas.width/2, ctx.canvas.height/2);    <span>กำลังโหลดข้อมูล...</span>
+
+    return;
+
+  }  </div>        <div class="stat-card" data-stat="avg">if (suggestionsBox && !suggestionsBox.textContent.trim()) {
+
+  
+
+  radarChart = new Chart(ctx, {</div>
+
+    type: 'radar',
+
+    data: {          <div class="stat-icon">📊</div>  suggestionsBox.textContent = 'กำลังโหลด...';
+
+      labels: entries.map(([label]) => label),
+
+      datasets: [{<script>
+
+        label: 'คะแนนเฉลี่ย',
+
+        data: entries.map(([, value]) => value),// ตัวแปรสำหรับเก็บ Chart instances          <div class="stat-content">}
+
+        fill: true,
+
+        backgroundColor: 'rgba(139, 92, 246, 0.2)',let barChart = null;
+
+        borderColor: 'rgba(139, 92, 246, 1)',
+
+        pointBackgroundColor: 'rgba(139, 92, 246, 1)',let radarChart = null;            <span class="stat-label">คะแนนเฉลี่ย</span>
+
+        pointBorderColor: '#fff',
+
+        pointHoverBackgroundColor: '#fff',let donutChart = null;
+
+        pointHoverBorderColor: 'rgba(139, 92, 246, 1)',
+
+        borderWidth: 2,            <span class="stat-value" id="avg">-</span>const statsTargets = {
+
+        pointRadius: 4
+
+      }]// การจัดการ DOM elements
+
+    },
+
+    options: {const elements = {            <span class="stat-unit">คะแนน</span>  avg: qs('#avg'),
+
+      responsive: true,
+
+      maintainAspectRatio: false,  stats: {
+
+      plugins: {
+
+        legend: {    avg: document.getElementById('avg'),          </div>  median: qs('#median'),
+
+          display: false
+
+        }    median: document.getElementById('median'),
+
+      },
+
+      scales: {    std: document.getElementById('std'),        </div>  std: qs('#std'),
+
+        r: {
+
+          beginAtZero: true,    count: document.getElementById('count')
+
+          max: 5,
+
+          grid: {  },        <div class="stat-card" data-stat="median">  count: qs('#count')
+
+            color: 'rgba(148, 163, 184, 0.2)'
+
+          },  filters: {
+
+          angleLines: {
+
+            color: 'rgba(148, 163, 184, 0.2)'    from: document.getElementById('from'),          <div class="stat-icon">📏</div>};
+
+          },
+
+          pointLabels: {    to: document.getElementById('to'),
+
+            color: '#475569',
+
+            font: {    respondent: document.getElementById('respondent')          <div class="stat-content">
+
+              family: 'Inter',
+
+              size: 12  },
+
+            }
+
+          },  suggestions: document.getElementById('suggestions'),            <span class="stat-label">ค่ามัธยฐาน</span>const formatStat = (val)=> (typeof val === 'number' && Number.isFinite(val)) ? val.toFixed(2) : '-';
+
+          ticks: {
+
+            display: false  suggestionsCount: document.getElementById('suggestionsCount'),
+
+          }
+
+        }  refreshBtn: document.getElementById('refreshBtn'),            <span class="stat-value" id="median">-</span>const formatCount = (val)=> (typeof val === 'number' && Number.isFinite(val)) ? val : '-';
+
+      },
+
+      animation: {  exportBtn: document.getElementById('exportCsv')
+
+        duration: 1200,
+
+        easing: 'easeOutQuart'};            <span class="stat-unit">คะแนน</span>let statsErrorShown = false;
+
+      }
+
+    }
+
+  });
+
+};// ฟังก์ชันช่วยเหลือ          </div>let suggestionsErrorShown = false;
+
+
+
+// ฟังก์ชันสำหรับสร้างกราฟโดนัทconst formatNumber = (num) => {
+
+const createDonutChart = (data) => {
+
+  const ctx = document.getElementById('donutChart').getContext('2d');  if (typeof num !== 'number' || !Number.isFinite(num)) return '-';        </div>
+
+  
+
+  if (donutChart) {  return num.toLocaleString('th-TH', { maximumFractionDigits: 2 });
+
+    donutChart.destroy();
+
+  }};        <div class="stat-card" data-stat="std">const filters = ()=>({
+
+  
+
+  const entries = Object.entries(data || {}).filter(([, value]) => value > 0);
+
+  if (entries.length === 0) {
+
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);const showToast = (message, type = 'info') => {          <div class="stat-icon">📐</div>  from: qs('#from')?.value || '',
+
+    ctx.font = '14px Inter';
+
+    ctx.fillStyle = '#64748b';  const toast = document.getElementById('toast');
+
+    ctx.textAlign = 'center';
+
+    ctx.fillText('🥧 ไม่มีข้อมูลผู้ตอบ', ctx.canvas.width/2, ctx.canvas.height/2);  toast.textContent = message;          <div class="stat-content">  to: qs('#to')?.value || '',
+
+    return;
+
+  }  toast.className = `toast ${type}`;
+
+  
+
+  const colors = [  toast.classList.remove('hidden');            <span class="stat-label">ส่วนเบี่ยงเบนมาตรฐาน</span>  respondent: qs('#respondent')?.value || ''
+
+    'rgba(239, 68, 68, 0.8)',
+
+    'rgba(245, 158, 11, 0.8)',  toast.classList.add('show');
+
+    'rgba(34, 197, 94, 0.8)',
+
+    'rgba(59, 130, 246, 0.8)',  setTimeout(() => {            <span class="stat-value" id="std">-</span>});
+
+    'rgba(139, 92, 246, 0.8)',
+
+    'rgba(236, 72, 153, 0.8)'    toast.classList.remove('show');
+
+  ];
+
+      setTimeout(() => toast.classList.add('hidden'), 400);            <span class="stat-unit">คะแนน</span>
+
+  donutChart = new Chart(ctx, {
+
+    type: 'doughnut',  }, 4000);
+
+    data: {
+
+      labels: entries.map(([label]) => label),};          </div>function applySummary(summary){
+
+      datasets: [{
+
+        data: entries.map(([, value]) => value),
+
+        backgroundColor: colors.slice(0, entries.length),
+
+        borderColor: colors.slice(0, entries.length).map(color => color.replace('0.8', '1')),const showGlobalLoading = () => {        </div>  if (statsTargets.avg) statsTargets.avg.textContent = formatStat(summary.avg);
+
+        borderWidth: 2,
+
+        hoverOffset: 4  document.getElementById('globalLoading').classList.remove('hidden');
+
+      }]
+
+    },};        <div class="stat-card" data-stat="count">  if (statsTargets.median) statsTargets.median.textContent = formatStat(summary.median);
+
+    options: {
+
+      responsive: true,
+
+      maintainAspectRatio: false,
+
+      plugins: {const hideGlobalLoading = () => {          <div class="stat-icon">📝</div>  if (statsTargets.std) statsTargets.std.textContent = formatStat(summary.stddev);
+
+        legend: {
+
+          position: 'bottom',  document.getElementById('globalLoading').classList.add('hidden');
+
+          labels: {
+
+            color: '#475569',};          <div class="stat-content">  if (statsTargets.count) statsTargets.count.textContent = formatCount(summary.count);
+
+            font: {
+
+              family: 'Inter',
+
+              size: 12
+
+            },// ฟังก์ชันสำหรับอัพเดตสถิติ            <span class="stat-label">จำนวนผู้ตอบ</span>}
+
+            padding: 15,
+
+            usePointStyle: trueconst updateStats = (data) => {
+
+          }
+
+        },  if (!data) return;            <span class="stat-value" id="count">-</span>
+
+        tooltip: {
+
+          backgroundColor: 'rgba(15, 23, 42, 0.9)',  
+
+          titleColor: '#f1f5f9',
+
+          bodyColor: '#f1f5f9',  elements.stats.avg.textContent = formatNumber(data.avg);            <span class="stat-unit">คน</span>function resetSummary(){
+
+          borderColor: 'rgba(148, 163, 184, 0.5)',
+
+          borderWidth: 1,  elements.stats.median.textContent = formatNumber(data.median);
+
+          cornerRadius: 8
+
+        }  elements.stats.std.textContent = formatNumber(data.stddev);          </div>  Object.values(statsTargets).forEach(el=>{ if (el) el.textContent = '-'; });
+
+      },
+
+      animation: {  elements.stats.count.textContent = formatNumber(data.count);
+
+        duration: 1000,
+
+        easing: 'easeOutQuart'          </div>}
+
+      }
+
+    }  // เพิ่ม animation
+
+  });
+
+};  Object.values(elements.stats).forEach(el => {      </div>
+
+
+
+// ฟังก์ชันโหลดข้อมูลสถิติ    if (el && el.parentElement) {
+
+const loadStats = async () => {
+
+  try {      el.parentElement.classList.add('stat-updated');    </section>function chartMessage(ctx, message, width, height){
+
+    showGlobalLoading();
+
+          setTimeout(() => el.parentElement.classList.remove('stat-updated'), 600);
+
+    const params = new URLSearchParams({
+
+      from: elements.filters.from.value || '',    }  ctx.clearRect(0,0,width,height);
+
+      to: elements.filters.to.value || '',
+
+      respondent: elements.filters.respondent.value || ''  });
+
+    });
+
+    };    <!-- กราฟและแผนภูมิ -->  ctx.save();
+
+    const response = await fetch(`/public/api/dashboard_stats.php?${params}`, {
+
+      cache: 'no-store'
+
+    });
+
+    // ฟังก์ชันสำหรับสร้างกราฟแท่ง    <section class="charts-section">  ctx.fillStyle = '#94a3b8';
+
+    const data = await response.json();
+
+    const createBarChart = (data) => {
+
+    if (!response.ok || !data.ok) {
+
+      throw new Error(data.error || 'เกิดข้อผิดพลาดในการโหลดข้อมูล');  const ctx = document.getElementById('barChart').getContext('2d');      <div class="charts-grid">  ctx.font = '14px system-ui';
+
+    }
+
+      
+
+    // อัพเดตสถิติ
+
+    updateStats(data.summary);  if (barChart) {        <!-- กราฟคะแนนเฉลี่ยต่อข้อ -->  ctx.textAlign = 'center';
+
+    
+
+    // สร้างกราฟ    barChart.destroy();
+
+    createBarChart(data.items || []);
+
+    createRadarChart(data.dimensions || {});  }        <div class="chart-card chart-wide" id="barChartCard">  ctx.textBaseline = 'middle';
+
+    createDonutChart(data.respondents || {});
+
+      
+
+    showToast('ข้อมูลได้รับการอัพเดตเรียบร้อยแล้ว', 'success');
+
+      if (!data || data.length === 0) {          <div class="chart-header">  ctx.fillText(message, width/2, height/2);
+
+  } catch (error) {
+
+    showToast(`เกิดข้อผิดพลาด: ${error.message}`, 'error');    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+    console.error('Error loading stats:', error);
+
+  } finally {    ctx.font = '16px Inter';            <h4>📊 คะแนนเฉลี่ยต่อข้อ</h4>  ctx.restore();
+
+    hideGlobalLoading();
+
+  }    ctx.fillStyle = '#64748b';
+
+};
+
+    ctx.textAlign = 'center';            <div class="chart-controls">}
+
+// ฟังก์ชันโหลดข้อเสนอแนะ
+
+const loadSuggestions = async () => {    ctx.fillText('📊 ไม่มีข้อมูลสำหรับแสดงผล', ctx.canvas.width/2, ctx.canvas.height/2);
+
+  try {
+
+    const params = new URLSearchParams({    return;              <button class="chart-btn" onclick="toggleChartView('bar')">📱</button>
+
+      from: elements.filters.from.value || '',
+
+      to: elements.filters.to.value || '',  }
+
+      respondent: elements.filters.respondent.value || ''
+
+    });              </div>function showLoading(container) {
+
+    
+
+    const response = await fetch(`/api/suggestions.php?${params}`, {  barChart = new Chart(ctx, {
+
+      cache: 'no-store'
+
+    });    type: 'bar',          </div>  if (!container) return;
+
+    
+
+    const data = await response.json();    data: {
+
+    
+
+    if (!response.ok || !data.ok) {      labels: data.map(item => item.code),          <div class="chart-container">  const overlay = document.createElement('div');
+
+      throw new Error(data.error || 'เกิดข้อผิดพลาดในการโหลดข้อเสนอแนะ');
+
+    }      datasets: [{
+
+    
+
+    const suggestions = data.data || [];        label: 'คะแนนเฉลี่ย',            <canvas id="barChart"></canvas>  overlay.className = 'loading-overlay';
+
+    elements.suggestionsCount.textContent = `${suggestions.length} รายการ`;
+
+            data: data.map(item => item.avg),
+
+    if (suggestions.length === 0) {
+
+      elements.suggestions.innerHTML = `        backgroundColor: 'rgba(99, 102, 241, 0.8)',          </div>  overlay.innerHTML = '<div class="loading-text"><div class="loading-spinner"></div>กำลังโหลด...</div>';
+
+        <div class="no-suggestions">
+
+          <div class="no-suggestions-icon">💭</div>        borderColor: 'rgba(99, 102, 241, 1)',
+
+          <p>ยังไม่มีข้อเสนอแนะ</p>
+
+        </div>        borderWidth: 2,        </div>  container.style.position = 'relative';
+
+      `;
+
+      return;        borderRadius: 8,
+
+    }
+
+            borderSkipped: false,  container.appendChild(overlay);
+
+    elements.suggestions.innerHTML = suggestions.slice(0, 20).map(item => `
+
+      <div class="suggestion-item">      }]
+
+        <div class="suggestion-meta">
+
+          <span class="suggestion-type">${item.respondent_type || 'ไม่ระบุ'}</span>    },        <!-- กราฟเรดาร์ -->}
+
+          <span class="suggestion-time">${new Date(item.created_at || Date.now()).toLocaleDateString('th-TH')}</span>
+
+        </div>    options: {
+
+        <div class="suggestion-text">${item.suggestion || ''}</div>
+
+      </div>      responsive: true,        <div class="chart-card" id="radarChartCard">
+
+    `).join('');
+
+          maintainAspectRatio: false,
+
+  } catch (error) {
+
+    elements.suggestions.innerHTML = `      plugins: {          <div class="chart-header">function hideLoading(container) {
+
+      <div class="error-suggestions">
+
+        <div class="error-icon">⚠️</div>        legend: {
+
+        <p>ไม่สามารถโหลดข้อเสนอแนะได้</p>
+
+      </div>          display: false            <h4>🎯 คะแนนตามมิติ</h4>  if (!container) return;
+
+    `;
+
+    console.error('Error loading suggestions:', error);        },
+
+  }
+
+};        tooltip: {          </div>  const overlay = container.querySelector('.loading-overlay');
+
+
+
+// Event Listeners          backgroundColor: 'rgba(15, 23, 42, 0.9)',
+
+if (elements.refreshBtn) {
+
+  elements.refreshBtn.addEventListener('click', () => {          titleColor: '#f1f5f9',          <div class="chart-container">  if (overlay) {
+
+    loadStats();
+
+    loadSuggestions();          bodyColor: '#f1f5f9',
+
+  });
+
+}          borderColor: 'rgba(99, 102, 241, 0.5)',            <canvas id="radarChart"></canvas>    overlay.style.opacity = '0';
+
+
+
+if (elements.exportBtn) {          borderWidth: 1,
+
+  elements.exportBtn.addEventListener('click', () => {
+
+    const params = new URLSearchParams({          cornerRadius: 8,          </div>    setTimeout(() => overlay.remove(), 200);
+
+      from: elements.filters.from.value || '',
+
+      to: elements.filters.to.value || '',          callbacks: {
+
+      respondent: elements.filters.respondent.value || ''
+
+    });            label: function(context) {        </div>  }
+
+    window.open(`/api/export_csv.php?${params}`, '_blank');
+
+  });              return `คะแนน: ${context.parsed.y.toFixed(2)}`;
+
+}
+
+            }}
+
+// เมื่อมีการเปลี่ยนแปลงตัวกรอง
+
+[elements.filters.from, elements.filters.to, elements.filters.respondent].forEach(element => {          }
+
+  if (element) {
+
+    element.addEventListener('change', () => {        }        <!-- กราฟโดนัท -->
+
+      loadStats();
+
+      loadSuggestions();      },
+
+    });
+
+  }      scales: {        <div class="chart-card" id="donutChartCard">function showSkeletonStats() {
+
+});
+
+        y: {
+
+// Theme toggle
+
+const themeToggle = document.getElementById('themeToggle');          beginAtZero: true,          <div class="chart-header">  const statsContainer = document.getElementById('statsContainer');
+
+if (themeToggle) {
+
+  themeToggle.addEventListener('click', () => {          max: 5,
+
+    const html = document.documentElement;
+
+    const isDark = html.classList.contains('theme-dark');          grid: {            <h4>🥧 สัดส่วนผู้ตอบ</h4>  if (!statsContainer) return;
+
+    
+
+    if (isDark) {            color: 'rgba(148, 163, 184, 0.1)'
+
+      html.classList.remove('theme-dark');
+
+      html.classList.add('theme-light');          },          </div>  statsContainer.classList.add('skeleton');
+
+      document.querySelector('[data-icon-sun]').classList.remove('hidden');
+
+      document.querySelector('[data-icon-moon]').classList.add('hidden');          ticks: {
+
+    } else {
+
+      html.classList.remove('theme-light');            color: '#64748b',          <div class="chart-container">}
+
+      html.classList.add('theme-dark');
+
+      document.querySelector('[data-icon-sun]').classList.add('hidden');            font: {
+
+      document.querySelector('[data-icon-moon]').classList.remove('hidden');
+
+    }              family: 'Inter'            <canvas id="donutChart"></canvas>
+
+  });
+
+}            }
+
+
+
+// โหลดข้อมูลครั้งแรก          }          </div>function hideSkeletonStats() {
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  loadStats();        },
+
+  loadSuggestions();
+
+          x: {        </div>  const statsContainer = document.getElementById('statsContainer');
+
+  // รีเฟรชอัตโนมัติทุก 30 วินาที
+
+  setInterval(() => {          grid: {
+
+    loadStats();
+
+    loadSuggestions();            display: false      </div>  if (!statsContainer) return;
+
+  }, 30000);
+
+});          },
+
+</script>
+
+</body>          ticks: {    </section>  statsContainer.classList.remove('skeleton');
+
+</html>
             color: '#64748b',
 
             font: {}
