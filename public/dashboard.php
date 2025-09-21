@@ -49,7 +49,7 @@ if (!$u || !in_array($u['role'], ['admin','teacher','committee'], true)) {
 
   <section class="card">
     <h2 class="card-title">สถิติรวม</h2>
-    <div class="stats">
+    <div class="stats" id="statsContainer">
       <div><strong>เฉลี่ย:</strong> <span id="avg">-</span></div>
       <div><strong>มัธยฐาน:</strong> <span id="median">-</span></div>
       <div><strong>ส่วนเบี่ยงเบน:</strong> <span id="std">-</span></div>
@@ -60,17 +60,17 @@ if (!$u || !in_array($u['role'], ['admin','teacher','committee'], true)) {
   <section class="card">
     <h2 class="card-title">กราฟ</h2>
     <div class="chart-grid">
-      <div class="chart-panel chart-panel-wide">
+      <div class="chart-panel chart-panel-wide" id="barChartPanel">
         <h3 class="chart-title">คะแนนเฉลี่ยต่อข้อ</h3>
         <div class="chart-scroll">
           <canvas id="bar" width="800" height="260"></canvas>
         </div>
       </div>
-      <div class="chart-panel">
+      <div class="chart-panel" id="radarChartPanel">
         <h3 class="chart-title">คะแนนเฉลี่ยตามมิติ</h3>
         <canvas id="radar" width="420" height="260"></canvas>
       </div>
-      <div class="chart-panel">
+      <div class="chart-panel" id="donutChartPanel">
         <h3 class="chart-title">สัดส่วนผู้ตอบ</h3>
         <canvas id="donut" width="320" height="220"></canvas>
       </div>
@@ -135,27 +135,69 @@ function chartMessage(ctx, message, width, height){
   ctx.restore();
 }
 
+function showLoading(container) {
+  if (!container) return;
+  const overlay = document.createElement('div');
+  overlay.className = 'loading-overlay';
+  overlay.innerHTML = '<div class="loading-text"><div class="loading-spinner"></div>กำลังโหลด...</div>';
+  container.style.position = 'relative';
+  container.appendChild(overlay);
+}
+
+function hideLoading(container) {
+  if (!container) return;
+  const overlay = container.querySelector('.loading-overlay');
+  if (overlay) {
+    overlay.style.opacity = '0';
+    setTimeout(() => overlay.remove(), 200);
+  }
+}
+
+function showSkeletonStats() {
+  const statsContainer = document.getElementById('statsContainer');
+  if (!statsContainer) return;
+  statsContainer.classList.add('skeleton');
+}
+
+function hideSkeletonStats() {
+  const statsContainer = document.getElementById('statsContainer');
+  if (!statsContainer) return;
+  statsContainer.classList.remove('skeleton');
+}
+
 async function loadStats(){
   try {
+    showSkeletonStats();
+    showLoading(document.getElementById('barChartPanel'));
+    showLoading(document.getElementById('radarChartPanel'));
+    showLoading(document.getElementById('donutChartPanel'));
+    
     const f = filters();
     const p = new URLSearchParams(f);
     const res = await fetch('/public/api/dashboard_stats.php?' + p.toString(), { cache: 'no-store' });
     const data = await res.json();
     if (!res.ok || !data.ok) throw new Error(data.error || 'stat error');
+    
     applySummary(data.summary || {});
     drawBar(data.items || []);
     drawRadar(data.dimensions || {});
     drawDonut(data.respondents || {});
     statsErrorShown = false;
+    showToast('ข้อมูลได้รับการอัพเดตแล้ว', 'success');
   } catch (err) {
     resetSummary();
     drawBar([]);
     drawRadar({});
     drawDonut({});
     if (!statsErrorShown) {
-      showToast('โหลดสถิติล้มเหลว','error');
+      showToast('โหลดสถิติล้มเหลว: ' + (err.message || 'เกิดข้อผิดพลาด'),'error');
       statsErrorShown = true;
     }
+  } finally {
+    hideSkeletonStats();
+    hideLoading(document.getElementById('barChartPanel'));
+    hideLoading(document.getElementById('radarChartPanel'));
+    hideLoading(document.getElementById('donutChartPanel'));
   }
 }
 
@@ -167,36 +209,74 @@ function drawDonut(breakdown){
   const H = canvas.height;
   const entries = Object.entries(breakdown || {}).filter(([,v])=>v>0);
   if (!entries.length){
-    chartMessage(ctx,'ไม่มีข้อมูล',W,H);
+    chartMessage(ctx,'👥 ไม่มีข้อมูลผู้ตอบ',W,H);
     return;
   }
   ctx.clearRect(0,0,W,H);
   const total = entries.reduce((sum,[,val])=>sum+val,0);
-  const colors = ['#4f46e5','#06b6d4','#10b981','#f59e0b','#ef4444','#a78bfa'];
+  const colors = ['#8b5cf6','#06b6d4','#10b981','#f59e0b','#ef4444','#a78bfa'];
   let start = -Math.PI/2;
-  const radius = Math.min(W,H)/2 - 18;
+  const radius = Math.min(W,H)/2 - 20;
+  const innerRadius = radius * 0.6;
+  
+  // Draw donut segments
   entries.forEach(([label,val], idx)=>{
     const angle = (val/total) * Math.PI * 2;
+    const color = colors[idx % colors.length];
+    
+    // Create gradient
+    const gradient = ctx.createRadialGradient(W/2, H/2, innerRadius, W/2, H/2, radius);
+    gradient.addColorStop(0, color);
+    gradient.addColorStop(1, color + '80');
+    
     ctx.beginPath();
-    ctx.moveTo(W/2,H/2);
-    ctx.fillStyle = colors[idx % colors.length];
     ctx.arc(W/2, H/2, radius, start, start + angle);
+    ctx.arc(W/2, H/2, innerRadius, start + angle, start, true);
     ctx.closePath();
+    ctx.fillStyle = gradient;
     ctx.fill();
+    
+    // Add subtle border
+    ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    
     start += angle;
   });
+  
+  // Center text
+  ctx.save();
+  ctx.font = 'bold 16px system-ui';
+  ctx.fillStyle = '#475569';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('รวม', W/2, H/2 - 8);
+  ctx.font = 'bold 20px system-ui';
+  ctx.fillText(total.toString(), W/2, H/2 + 8);
+  ctx.restore();
+  
+  // Legend
   ctx.save();
   ctx.font = '12px system-ui';
   ctx.textBaseline = 'middle';
   ctx.textAlign = 'left';
-  const legendX = 24;
-  let y = Math.max(20, H - entries.length * 18 - 12);
+  const legendX = 20;
+  let y = Math.max(20, H - entries.length * 22 - 12);
   entries.forEach(([label,val], idx)=>{
-    ctx.fillStyle = colors[idx % colors.length];
-    ctx.fillRect(legendX, y - 6, 12, 12);
+    const color = colors[idx % colors.length];
+    // Legend color box with gradient
+    const gradient = ctx.createLinearGradient(legendX, y-6, legendX+14, y+6);
+    gradient.addColorStop(0, color);
+    gradient.addColorStop(1, color + '80');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(legendX, y - 6, 14, 12);
+    ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+    ctx.strokeRect(legendX, y - 6, 14, 12);
+    
+    // Legend text
     ctx.fillStyle = '#475569';
-    ctx.fillText(`${label || 'unknown'} (${val})`, legendX + 18, y);
-    y += 18;
+    ctx.fillText(`${label || 'unknown'} (${val})`, legendX + 20, y);
+    y += 22;
   });
   ctx.restore();
 }
@@ -216,7 +296,7 @@ function drawBar(items){
   canvas.height = H;
   const ctx = canvas.getContext('2d');
   if (!data.length){
-    chartMessage(ctx,'ไม่มีข้อมูล',W,H);
+    chartMessage(ctx,'📊 ไม่มีข้อมูลสำหรับแสดงผล',W,H);
     return;
   }
   ctx.clearRect(0,0,W,H);
@@ -224,36 +304,71 @@ function drawBar(items){
   const axisMax = Math.max(5, Math.ceil(Math.max(...values) * 1.1));
   const chartHeight = H - padB - 24;
   const scale = chartHeight / axisMax;
-  ctx.strokeStyle = '#cbd5e1';
-  ctx.beginPath(); ctx.moveTo(padL, 20); ctx.lineTo(padL, H - padB); ctx.stroke();
-  ctx.beginPath(); ctx.moveTo(padL, H - padB); ctx.lineTo(W - 20, H - padB); ctx.stroke();
-  ctx.font = '12px system-ui';
-  ctx.fillStyle = '#64748b';
-  ctx.textAlign = 'right';
+  
+  // Grid lines
+  ctx.strokeStyle = 'rgba(203,213,225,0.4)';
+  ctx.lineWidth = 1;
   const ticks = 5;
   for (let i = 1; i <= ticks; i++){
     const value = (axisMax / ticks) * i;
     const yy = H - padB - value * scale;
-    const label = value % 1 === 0 ? value.toString() : value.toFixed(1);
-    ctx.fillText(label, padL - 6, yy + 4);
-    ctx.strokeStyle = 'rgba(148,163,184,0.25)';
     ctx.beginPath();
     ctx.moveTo(padL + 2, yy);
     ctx.lineTo(W - 20, yy);
     ctx.stroke();
   }
+  
+  // Axes
+  ctx.strokeStyle = '#475569';
+  ctx.lineWidth = 2;
+  ctx.beginPath(); 
+  ctx.moveTo(padL, 20); 
+  ctx.lineTo(padL, H - padB); 
+  ctx.lineTo(W - 20, H - padB);
+  ctx.stroke();
+  
+  // Y-axis labels
+  ctx.font = '12px system-ui';
+  ctx.fillStyle = '#64748b';
+  ctx.textAlign = 'right';
+  for (let i = 1; i <= ticks; i++){
+    const value = (axisMax / ticks) * i;
+    const yy = H - padB - value * scale;
+    const label = value % 1 === 0 ? value.toString() : value.toFixed(1);
+    ctx.fillText(label, padL - 8, yy + 4);
+  }
+  
+  // Bars with gradient
   ctx.textAlign = 'center';
   data.forEach((item, idx)=>{
     const x = padL + idx * (barWidth + gap);
     const height = item.avg * scale;
     const y = H - padB - height;
-    ctx.fillStyle = '#4f46e5';
+    
+    // Create gradient
+    const gradient = ctx.createLinearGradient(0, y, 0, y + height);
+    gradient.addColorStop(0, '#8b5cf6');
+    gradient.addColorStop(1, '#4f46e5');
+    
+    ctx.fillStyle = gradient;
     ctx.fillRect(x, y, barWidth, height);
+    
+    // Highlight effect
+    ctx.fillStyle = 'rgba(255,255,255,0.3)';
+    ctx.fillRect(x, y, barWidth, Math.min(8, height));
+    
+    // Value on top
+    ctx.fillStyle = '#475569';
+    ctx.font = '11px system-ui';
+    ctx.fillText(item.avg.toFixed(1), x + barWidth/2, y - 6);
+    
+    // X-axis labels
     ctx.save();
     ctx.translate(x + barWidth / 2, H - padB + 18);
     ctx.rotate(-Math.PI / 4);
     ctx.fillStyle = '#475569';
     ctx.textAlign = 'left';
+    ctx.font = '12px system-ui';
     ctx.fillText(item.code, 0, 0);
     ctx.restore();
   });
